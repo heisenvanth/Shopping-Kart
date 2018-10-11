@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:c="http://www.springframework.org/schema/c"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ 
+<bean class="com.niit.EcomKart.DatabaseConnection" id="databaseConnection">
+<property name="url" value="hr"></property>
+<property name="driverClassName" value="com.h2.driver"></property>
+<property name="username" value="user1234"></property>
+<property name="password" value="1234def"></property>
+</bean>
+
+<bean class="com.niit.EcomKart.HelloWorld" id="helloWorld"></bean>
+</beans>
