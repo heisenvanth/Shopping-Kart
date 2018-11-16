@@ -2,7 +2,8 @@ package com.niit.DBConfiguration;
 
 import java.util.Properties;
 
-import javax.persistence.AttributeOverride;
+
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -15,7 +16,14 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.model.Authorities;
+import com.niit.model.BillingAddress;
+import com.niit.model.CartItem;
+import com.niit.model.Category;
+import com.niit.model.Customer;
 import com.niit.model.Product;
+import com.niit.model.ShippingAddress;
+import com.niit.model.User;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.niit.*")
@@ -25,12 +33,12 @@ public class DbConfig {
 			System.out.println("DBConfiguration bean is created");
 		}
 		@Autowired
-		@Bean
+		@Bean(name="dataSource")
 		public DataSource getDataSource() {
 			System.out.println("Entering Datasource bean creation method");
 			BasicDataSource dS=new BasicDataSource();
 			dS.setDriverClassName("org.h2.Driver");
-			dS.setUrl("jdbc:h2:tcp://localhost/~/s190125_125");
+			dS.setUrl("jdbc:h2:tcp://localhost/~/Demo");
 			dS.setUsername("hima");
 			dS.setPassword("hima");
 			System.out.println("Datasource bean="+dS);
@@ -47,7 +55,7 @@ public class DbConfig {
 			hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 			hibernateProperties.setProperty("hibernate.show_sql", "true");
 			lsf.addProperties(hibernateProperties);
-			Class classes[]=new Class[] {Product.class};
+			Class classes[]=new Class[] {Product.class, Category.class, Authorities.class, BillingAddress.class, Customer.class, ShippingAddress.class, User.class,CartItem.class};
 			System.out.println("Local Session factory bean="+lsf);
 			return lsf.addAnnotatedClasses(classes).buildSessionFactory();
 			
